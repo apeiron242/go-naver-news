@@ -32,7 +32,10 @@ func main() {
 
 	e.POST("/search", handlePost)
 
-	e.Logger.Fatal(e.Start(os.Getenv("PORT")))
+	// PORT := os.Getenv("PORT")
+	PORT := ":8000"
+
+	e.Logger.Fatal(e.Start(PORT))
 }
 
 func handlePost(c echo.Context) error {
@@ -46,11 +49,11 @@ func scrape(term string) {
 	c := make(chan []news)
 	var newsData []news
 
-	for i := 1; i < 311; i += 10 {
+	for i := 1; i < 711; i += 10 {
 		go handleScrape(term, c, i)
 	}
 
-	for i := 1; i < 30; i++ {
+	for i := 1; i < 70; i++ {
 		datas := <-c
 		newsData = append(newsData, datas...)
 	}
