@@ -24,6 +24,7 @@ type news struct {
 }
 
 func main() {
+	fmt.Println("Hello Heroku")
 	e := echo.New()
 
 	e.GET("/", func(c echo.Context) error {
@@ -34,7 +35,7 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = ":8080"
+		port = ":1323"
 	}
 
 	e.Logger.Fatal(e.Start(port))
