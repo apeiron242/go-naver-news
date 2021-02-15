@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/csv"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -116,12 +115,12 @@ func cleanStrings(str string) string {
 
 func checkErr(err error) {
 	if err != nil {
-		log.Fatalln(err)
+		fmt.Println(err)
 	}
 }
 
 func checkStatus(code int) {
 	if code != 200 {
-		log.Fatalln("Status is not 200")
+		fmt.Println("Status is not 200")
 	}
 }
