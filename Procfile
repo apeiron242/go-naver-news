@@ -1,1 +1,1 @@
-web: go-naver-news
+echo "web: go-naver-news" > Procfile
