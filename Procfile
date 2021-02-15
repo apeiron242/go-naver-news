@@ -1,1 +1,1 @@
-web: ./go-naver-news
+web: bin/go-naver-news
