@@ -32,10 +32,12 @@ func main() {
 
 	e.POST("/search", handlePost)
 
-	PORT := os.Getenv("PORT")
-	// PORT := ":8000"
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = ":8080"
+	}
 
-	e.Logger.Fatal(e.Start(PORT))
+	e.Logger.Fatal(e.Start(port))
 }
 
 func handlePost(c echo.Context) error {
