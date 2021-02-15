@@ -1,1 +1,2 @@
-echo "web: go-naver-news" > Procfile
+web: bin/go-naver-news
+echo "web: bin/go-naver-news" > Procfile
