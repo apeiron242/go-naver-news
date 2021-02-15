@@ -35,10 +35,10 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = ":1323"
+		port = "1323"
 	}
 
-	e.Logger.Fatal(e.Start(port))
+	e.Logger.Fatal(e.Start(":" + port))
 }
 
 func handlePost(c echo.Context) error {
