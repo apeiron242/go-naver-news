@@ -17,6 +17,8 @@ var url1 string = "https://search.naver.com/search.naver?&where=news&query="
 var url2 string = "&sm=tab_pge&sort=0&photo=0&field=0&reporter_article=&pd=0&ds=&de=&docid=&nso=so:r,p:all,a:all&mynews=0&cluster_rank=17&"
 var url3 string = "&refresh_start=20"
 
+var errChecking int
+
 type news struct {
 	title string
 	url   string
@@ -47,6 +49,9 @@ func handlePost(c echo.Context) error {
 	term := c.FormValue("term")
 	scrape(term)
 	defer os.Remove(term + ".csv")
+	if errChecking != 200 {
+		return c.File("error.html")
+	}
 	return c.Attachment("./"+term+".csv", term+".csv")
 }
 
@@ -72,7 +77,11 @@ func handleScrape(term string, c chan []news, i int) {
 	fmt.Println("Scraping", i)
 	res, err := http.Get(url1 + term + url2 + "start=" + strconv.Itoa(i) + url3)
 	checkErr(err)
-	checkStatus(res.StatusCode)
+
+	if res.StatusCode != 200 {
+		fmt.Println("Status is not 200", res.StatusCode)
+		errChecking = res.StatusCode
+	}
 
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	checkErr(err)
@@ -116,11 +125,5 @@ func cleanStrings(str string) string {
 func checkErr(err error) {
 	if err != nil {
 		fmt.Println(err)
-	}
-}
-
-func checkStatus(code int) {
-	if code != 200 {
-		fmt.Println("Status is not 200")
 	}
 }
