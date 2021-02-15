@@ -32,8 +32,8 @@ func main() {
 
 	e.POST("/search", handlePost)
 
-	// PORT := os.Getenv("PORT")
-	PORT := ":8000"
+	PORT := os.Getenv("PORT")
+	// PORT := ":8000"
 
 	e.Logger.Fatal(e.Start(PORT))
 }
