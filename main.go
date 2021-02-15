@@ -32,7 +32,7 @@ func main() {
 
 	e.POST("/search", handlePost)
 
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start($PORT))
 }
 
 func handlePost(c echo.Context) error {
