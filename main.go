@@ -32,7 +32,7 @@ func main() {
 
 	e.POST("/search", handlePost)
 
-	e.Logger.Fatal(e.Start($PORT))
+	e.Logger.Fatal(e.Start(os.Getenv("PORT")))
 }
 
 func handlePost(c echo.Context) error {
